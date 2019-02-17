@@ -1,0 +1,54 @@
+<head>
+	<title>Cooking Timer</title>
+	<link rel = "stylesheet" type = "text/css" href = "main.css" />
+	<link rel = "shortcut icon" href = "favicon.png" type = "image/png" />
+	<link rel = "manifest" href = "manifest.json" />
+	<meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+	<meta name = "theme-color" content = "#dee3e7">
+</head>
+
+<body>
+	<header>
+		<h1>&#127858; Cooking Timer</h1>
+
+		<nav>
+			<button class = "good" onclick = "createFood()">&#43;</button>
+			<button class = "good" onclick = "window.cookingPot.updatePlan()">Plan</button>
+		</nav>
+	</header>
+
+	<content>
+		<p id = "results"><span><em>Add food, and then plan!</em></span></p>
+		<hr />
+		<p>Start at <input type = "time" id = "startTime" />. </p>
+
+		<ol id = "list" />
+	</content>
+
+	<template id = "food-item">	
+		<div>
+			<span>	&#8987;</span><span class = "prefix">?</span>
+			<input style = "width: 100%" value = "untitled food" maxlength = "20" /><span>for</span>
+			<input type = "number" min = "0" max = "999" value = "20" /><span>min</span>
+			<button class = "bad" onclick = "#">&#128465;</button>
+		</div>
+	</template>
+
+
+<script type = "module">
+import CookingPot from "./js/CookingPot.js";
+import * as main from "./main.js";
+
+main.init();
+
+window.createFood = main.createFood;
+window.cookingPot = new CookingPot();
+
+window.addEventListener("load", function() {
+	navigator.serviceWorker.register("serviceWorker.js").then(function(registration) {
+		console.log("Service Worker installed", registration.scope);
+	}).catch(err => console.log);
+
+});
+</script>
+</body>

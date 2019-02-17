@@ -1,0 +1,16 @@
+{
+	"short_name": "Cooking Timer",
+	"name": "Cooking Timer",
+	"icons": [
+		{
+			"src": "favicon.png",
+			"type": "image/png",
+			"sizes": "735x735"
+		}
+	],
+	"start_url": "http://localhost/cookingtimer/",
+	"background_color": "#dee3e7",
+	"display": "standalone",
+	"scope": "/cookingTimer", 
+	"theme_color": "#dee3e7"
+}
