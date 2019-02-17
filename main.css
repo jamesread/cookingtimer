@@ -126,3 +126,10 @@ food-item p {
 
 #results {
 }
+
+footer {
+	margin-top: 2em;
+	padding .5em;
+	text-align: center;
+	font-size: .5em;
+}

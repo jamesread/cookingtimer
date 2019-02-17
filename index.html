@@ -1,4 +1,6 @@
-<html>
+<!DOCTYPE html>
+
+<html lang = "en">
 
 <head>
 	<title>Cooking Timer</title>
@@ -14,8 +16,8 @@
 		<h1>&#127858; Cooking Timer</h1>
 
 		<nav>
-			<button class = "good" onclick = "createFood()">&#43;</button>
-			<button class = "good" onclick = "window.cookingPot.updatePlan()">Plan</button>
+			<button class = "good" onclick = "createFood()" title = "Add food" accesskey = "a">&#43;</button>
+			<button class = "good" onclick = "window.cookingPot.updatePlan()" title = "Plan" accesskey = "p">Plan</button>
 		</nav>
 	</header>
 
@@ -24,15 +26,20 @@
 		<hr />
 		<p>Start at <input type = "time" id = "startTime" />. </p>
 
-		<ol id = "list" />
+		<ol id = "list"></ol>
 	</content>
+
+	<footer>
+		<a href = "https://github.com/jamesread/cookingtimer" target = "_blank" rel = "noopener">CookingTimer GitHub Page</a>
+	</footer>
+
 
 	<template id = "food-item">	
 		<div>
 			<span>	&#8987;</span><span class = "prefix">?</span>
 			<input style = "width: 100%" value = "untitled food" maxlength = "20" /><span>for</span>
 			<input type = "number" min = "0" max = "999" value = "20" /><span>min</span>
-			<button class = "bad" onclick = "#">&#128465;</button>
+			<button class = "bad" onclick = "#" title = "Delete food item">&#128465;</button>
 		</div>
 	</template>
 
