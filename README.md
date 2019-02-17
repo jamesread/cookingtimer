@@ -15,3 +15,6 @@ This app was built as a technical demo, covering;
 - HTML5 App standard
 - "Modern" Javascript (ie, ES6 Classes/Imports)
 
+## Audit scores
+
+![audit score screenshot from chrome](misc/chromeAuditScore.png)
