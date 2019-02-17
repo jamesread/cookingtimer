@@ -10,7 +10,7 @@ export function init() {
 
 	createFood("Steak", 10);
 	createFood("Potatos", 20);
-	createFood("Brocolli", 40);
+	createFood("Broccoli", 40);
 }
 
 export function createFood(title = "untitled food", duration = 20) {

@@ -73,7 +73,7 @@ content {
 	margin: 0;
 }
 
-div {
+food-item div {
 	background-color: white;
 	font-family: sans-serif;
 	margin-bottom: .5em;
@@ -82,7 +82,7 @@ div {
 	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
-div * {
+food-item div input, food-item div span, food-item div button {
 	margin: .2em;
 }
 
