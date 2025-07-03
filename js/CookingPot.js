@@ -25,8 +25,14 @@ export default class CookingPot {
 			food.setPrefix("" + formatTime(cookTime));
 		}
 
-		let description = "Ready in <strong>" + longestDuration + "</strong> minutes, at <strong>" + formatTime(finishTime) + "</strong>"; 
-		document.querySelector('#results').innerHTML = description;
+        if (window.updateInterval) {
+          clearInterval(window.updateInterval);
+        }
+
+        window.updateInterval = setInterval(() => {
+          let description = "Ready in <strong>" + longestDuration + "</strong> minutes, at <strong>" + formatTime(finishTime) + "</strong>"; 
+          document.querySelector('#results').innerHTML = description;
+        }, 1000);
 	}
 }
 
