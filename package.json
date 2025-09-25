@@ -19,6 +19,6 @@
   "dependencies": {
     "@iconify/vue": "^5.0.0",
     "femtocrank": "^1.2.1",
-    "vite": "^7.0.1"
+    "vite": "^7.1.7"
   }
 }
