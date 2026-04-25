@@ -12,46 +12,48 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      packages: write
+
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Use Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
-        node-version: 18.x
+        node-version: 20.x
         cache: 'npm'
 
-    - name: Login to Docker Hub
-      uses: docker/login-action@v3.5.0
-      with:
-        username: jamesread
-        password: ${{ secrets.DOCKERHUB_PASSWORD }}
-
-    - name: Login to ghcr
-      uses: docker/login-action@v3.5.0
-      with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.CONTAINER_TOKEN }}
-
-    - name: Make npm install
-      run: npm install
+    - name: Install dependencies
+      run: npm ci
 
     - name: Make dist-prod
       run: make -w dist-prod
 
-    - name: Get date
-      run: |
-        echo "DATE=$(date +'%s')" >> "$GITHUB_ENV"
+    - name: Image tag
+      id: tag
+      run: echo "tag=$(date +'%s')" >> "$GITHUB_OUTPUT"
 
     - name: Build the Container image
-      run: docker build . --file Dockerfile --tag ghcr.io/jamesread/cookingtimer:${{ env.DATE }}
+      run: docker build . --file Dockerfile --tag "ghcr.io/jamesread/cookingtimer:${{ steps.tag.outputs.tag }}"
+
+    - name: Login to ghcr.io
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: docker/login-action@v3.5.0
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ github.token }}
 
     - name: Tag latest
-      run: docker tag ghcr.io/jamesread/cookingtimer:${{ env.DATE }} ghcr.io/jamesread/cookingtimer:latest
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      run: docker tag "ghcr.io/jamesread/cookingtimer:${{ steps.tag.outputs.tag }}" ghcr.io/jamesread/cookingtimer:latest
 
     - name: Push the Container image
-      run: docker push ghcr.io/jamesread/cookingtimer:${{ env.DATE }}
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      run: docker push "ghcr.io/jamesread/cookingtimer:${{ steps.tag.outputs.tag }}"
 
     - name: Push the Container image - latest tag
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       run: docker push ghcr.io/jamesread/cookingtimer:latest
